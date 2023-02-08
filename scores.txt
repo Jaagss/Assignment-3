@@ -1,4 +1,4 @@
 file_1.txt
 SCORE: 9.523809523809524
 Top five words: the you to she that 
-Random words: person., out, that, hiding, didn't
+Random words: have, was, up, fear, she

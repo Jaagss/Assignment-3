@@ -1,3 +1,4 @@
+import time
 with open("marks.txt",'r') as f:
     a = f.read().splitlines()
 
@@ -6,7 +7,7 @@ for i in a:
     i = i.split(', ')
     main_list.append(i)
 
-total_mark = [100,100,100,100]
+total_mark = [30,15,30,25]
 weightage = [('labs',30),('midsem',15),('assignments',30),('endsem',25)]
 policy = [80,65,50,40]
 grade = ['A','B','C','D','F']
@@ -57,7 +58,7 @@ def final_cutoff(policy):
             else:
                 pol[i] = final_percentile_list[0]
     return pol
-print(final_cutoff(policy))
+
 
 def grading(pol):
     policy = final_cutoff(pol)
@@ -103,6 +104,7 @@ def counter_1(pol):
     counter_list.append(F)
     return counter_list
 
+
 counter = counter_1(policy)
 policy = final_cutoff(policy)
 def get_summary(cname, credit,policy):
@@ -114,11 +116,12 @@ def get_summary(cname, credit,policy):
     print("     A -",counter[0],"B -",counter[1],"C -",counter[2],"D -",counter[3],"F -",counter[4])
 
 
+final_grade = grading(policy)
 def grade_in_file(main):
     with open('grade.txt','w') as f:
         for i in range(len(main)):
-            f.write(main[i][0] + ', ' + str(total_student_marks[i]) + ', ' + str(grade[i]) + '\n')
-
+            f.write(main[i][0] + ', ' + str(total_student_marks[i]) + ', ' + str(final_grade[i]) + '\n')
+    
 
 def student_record(main_list):
     rollno = str(input("Enter roll no: "))
@@ -126,7 +129,9 @@ def student_record(main_list):
         if str(main_list[i][0]) == rollno:
             print(main_list[i][1::],end=", ")
             print(total_student_marks[i],end=", ")
-            print(grade[i])
+            print(final_grade[i])
+            break
+
 
 while True:
     print("1. Generate grading summary\n2. Print grade of all students in file\n3. Search for a students record\n")
@@ -137,6 +142,7 @@ while True:
         credit = input("Enter credits: ")
         get_summary(cname,credit,policy)
     elif choice == 2:
-        grade_in_file()
+        grade_in_file(main_list)
     elif choice == 3:
         student_record(main_list)
+    print()

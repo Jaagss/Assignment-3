@@ -2,6 +2,7 @@ import random
 
 n = int(input("Enter number of files: "))
 
+
 def read_file(file):
     with open(file,'r') as f:
         a = f.read().splitlines()
@@ -36,7 +37,6 @@ def F_2(file):
         words_dict[i] = word_list.count(i)
     words_occur = sorted(words_dict.items(), key = lambda x: x[1], reverse = True)
     count_occur = 0
-
     try:
         for i in range(5):
             count_occur += words_occur[i][1]
@@ -96,6 +96,7 @@ def F_5(file):
         return 1
     else:
         return 0
+
 
 def rand(file):
     a = read_file(file)

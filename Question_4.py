@@ -1,3 +1,4 @@
+import time
 with open("marks.txt",'r') as f:
     a = f.read().splitlines()
 
@@ -6,7 +7,7 @@ for i in a:
     i = i.split(', ')
     main_list.append(i)
 
-total_mark = [100,100,100,100]
+total_mark = [30,15,30,25]
 weightage = [('labs',30),('midsem',15),('assignments',30),('endsem',25)]
 policy = [80,65,50,40]
 total_student_marks = []
@@ -57,8 +58,7 @@ class course:
                     pass
                 if final_percentile_list == []:
                     pass
-                else:
-                    
+                else:  
                     self.policy[i] = final_percentile_list[0]
 
     def grading(self):
@@ -127,7 +127,8 @@ class Student:
         with open('grade.txt','w') as f:
             for i in range(len(main_list)):
                 f.write(main_list[i][0] + ', ' + str(total_student_marks[i]) + ', ' + str(self.grade[i]) + '\n')
-
+        
+        
 
     def student_record(self,main_list):
         rollno = str(input("Enter roll no: "))
@@ -136,7 +137,7 @@ class Student:
                 print(main_list[i][1::],end=", ")
                 print(total_student_marks[i],end=", ")
                 print(self.grade[i])
-
+                break
 
 course_class = course(policy)
 course_class.cutoff_final()
@@ -153,3 +154,4 @@ while True:
         stu.grade_in_file()
     elif choice == 3:
         stu.student_record(main_list)
+    print()
