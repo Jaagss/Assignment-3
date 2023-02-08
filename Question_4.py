@@ -6,7 +6,7 @@ for i in a:
     i = i.split(', ')
     main_list.append(i)
 
-total_mark = [30,15,30,25]
+total_mark = [100,100,100,100]
 weightage = [('labs',30),('midsem',15),('assignments',30),('endsem',25)]
 policy = [80,65,50,40]
 total_student_marks = []
@@ -33,9 +33,9 @@ class course:
         return percentile_list
     
     def cutoff_final(self):
-        final_percentile_list = []
         percentile_list = course(self.policy).percentile()
         for i in range(len(self.policy)):
+            final_percentile_list = []
             temp_list = []
             for j in percentile_list:
                 if j <= self.policy[i]+2 and j >= self.policy[i]-2:
@@ -51,12 +51,15 @@ class course:
                         diff = temp_list[k-1] - temp_list[k]
                         v1 = temp_list[k-1]
                         v2 = temp_list[k]
-                        final_percentile_list.append((v1+v2)/2)
+                try:
+                    final_percentile_list.append((v1+v2)/2)
+                except UnboundLocalError:
+                    pass
                 if final_percentile_list == []:
                     pass
                 else:
                     
-                    self.policy[i] = final_percentile_list[i]
+                    self.policy[i] = final_percentile_list[0]
 
     def grading(self):
         percentile_list = course(self.policy).percentile()

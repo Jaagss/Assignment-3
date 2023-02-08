@@ -6,7 +6,7 @@ for i in a:
     i = i.split(', ')
     main_list.append(i)
 
-total_mark = [30,15,30,25]
+total_mark = [100,100,100,100]
 weightage = [('labs',30),('midsem',15),('assignments',30),('endsem',25)]
 policy = [80,65,50,40]
 grade = ['A','B','C','D','F']
@@ -28,12 +28,12 @@ def percentage(main,total_mark,weights):
         percentile_list.append(temp)
     return percentile_list
 
-
 def final_cutoff(policy):
     final_percentile_list = []
     percentile_list = percentage(main_list,total_mark,weightage)
     pol = policy.copy()
     for i in range(len(policy)):
+        final_percentile_list = []
         temp = []
         for j in percentile_list:
                 if j <= pol[i]+2 and j >= pol[i]-2:
@@ -48,13 +48,16 @@ def final_cutoff(policy):
                     diff = temp[k-1] - temp[k]
                     v1 = temp[k-1]
                     v2 = temp[k]
-                    final_percentile_list.append((v1+v2)/2)
+            try:
+                final_percentile_list.append((v1+v2)/2)
+            except UnboundLocalError:
+                pass
             if final_percentile_list == []:
                 pass
             else:
-                pol[i] = final_percentile_list[i]
+                pol[i] = final_percentile_list[0]
     return pol
-
+print(final_cutoff(policy))
 
 def grading(pol):
     policy = final_cutoff(pol)
