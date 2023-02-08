@@ -1,3 +1,5 @@
+import random
+
 n = int(input("Enter number of files: "))
 
 def read_file(file):
@@ -40,7 +42,7 @@ def F_2(file):
             count_occur += words_occur[i][1]
     except:
         pass
-    return count_occur/count_words
+    return count_occur/count_words , words_occur
 
 
 def F_3(file):
@@ -48,16 +50,14 @@ def F_3(file):
     sentence = []
     total_sentence = []
     for i in a:
-        i = i.strip(',:; ')
+        i = i.strip('.,:; ')
         i = i.split('. ')
-        print(i)
         for j in i:
             words_count = j.split()
             if len(words_count) > 35 or len(words_count) < 5:
                 sentence.append(j)
             total_sentence.append(j)
-    print(len(sentence))
-    print(len(total_sentence))
+
     return len(sentence)/len(total_sentence)
 
 
@@ -84,7 +84,10 @@ def F_5(file):
     count = 0
     for i in a:
         i = i.split('.')
-        i.remove("")
+        try:
+            i.remove("")
+        except:
+            pass
         for j in i:
             j = j.split()
             count += len(j)
@@ -94,17 +97,28 @@ def F_5(file):
     else:
         return 0
 
+def rand(file):
+    a = read_file(file)
+    words = []
+    for i in a:
+        i = i.split()
+        words += i
+    return random.sample(words,5)
 
-for i in range(n):
-    file_name = input("Enter File Name: ")
-    f1 = F_1(file_name)
-    f2 = F_2(file_name)
-    f3 = F_3(file_name)
-    f4 = F_4(file_name)
-    f5 = F_5(file_name)
-    print(f1)
-    print(f2)
-    print(f3)
-    print(f4)
-    print(f5)
-    print(4+f1*6+f2*6-f3-f4-f5)
+
+with open("scores.txt",'w') as f:
+    for i in range(n):
+        file_name = input("Enter File Name: ")
+        f1 = F_1(file_name)
+        f2,dict_word = F_2(file_name)
+        f3 = F_3(file_name)
+        f4 = F_4(file_name)
+        f5 = F_5(file_name)
+        f.write(file_name + '\n')
+        f.write("SCORE: " + str(4+f1*6+f2*6-f3-f4-f5) + '\n'+'Top five words: ' )
+        for i in range(5):
+            f.write(dict_word[i][0] + " ")
+        ans = ''
+        for i in rand('file_1.txt'):
+            ans += i + ', '
+        f.write('\n' + 'Random words: ' + ans[:-2])
