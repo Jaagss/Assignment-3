@@ -15,13 +15,13 @@ total_student_marks = []
 for i in main_list:
     sum_ = 0
     for j in range(1,len(i)):
-        sum_ += int(i[j])
+        sum_ += float(i[j])
     total_student_marks.append(sum_)
 
 
 class course:
     def __init__(self,policy):
-        self.policy = policy
+        self.policy = policy;
         self.grade = ['A','B','C','D','F']
     
     def percentile(self):
@@ -147,11 +147,13 @@ stu = Student('IP',"4",weightage,policy,course_class.grading(),course_class.coun
 while True:
     print("1. Generate grading summary\n2. Print grade of all students in file\n3. Search for a students record\n")
     
-    choice = int(input("Enter choice: "))
-    if choice == 1:
+    choice = input("Enter choice: ")
+    if choice == '1':
         stu.get_summary()
-    elif choice == 2:
+    elif choice == '2':
         stu.grade_in_file()
-    elif choice == 3:
+    elif choice == '3':
         stu.student_record(main_list)
+    else:
+        break
     print()

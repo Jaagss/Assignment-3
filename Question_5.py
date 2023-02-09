@@ -16,7 +16,7 @@ total_student_marks = []
 for i in main_list:
     sum_ = 0
     for j in range(1,len(i)):
-        sum_ += int(i[j])
+        sum_ += float(i[j])
     total_student_marks.append(sum_)
 
 
@@ -136,13 +136,15 @@ def student_record(main_list):
 while True:
     print("1. Generate grading summary\n2. Print grade of all students in file\n3. Search for a students record\n")
     
-    choice = int(input("Enter choice: "))
-    if choice == 1:
+    choice = input("Enter choice: ")
+    if choice == '1':
         cname = input("Enter course name: ")
         credit = input("Enter credits: ")
         get_summary(cname,credit,policy)
-    elif choice == 2:
+    elif choice == '2':
         grade_in_file(main_list)
-    elif choice == 3:
+    elif choice == '3':
         student_record(main_list)
+    else:
+        break
     print()

@@ -89,14 +89,14 @@ def gate_find(Entry):
 
 while True:
     print("1: Give Student Name\n2: Give Start and End Time\n3: Gate number\n")
-    l = int(input("Enter choice: "))
-    if l == None:
-        break
-    elif l == 1:
+    l = input("Enter choice: ")
+    if l == '1':
         name_find(Campus_Entry)
-    elif l == 2:
+    elif l == '2':
         time_find(Campus_Entry)
-    elif l == 3:
+    elif l == '3':
         entry,exit_student = gate_find(Campus_Entry)
         print(entry)
         print(exit_student)
+    else:
+        break
